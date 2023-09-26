@@ -8,6 +8,10 @@
     "rating": 3
   },
   {
+    "name": "Dalton Cézane",
+    "rating": 2
+  },
+  {
     "name": "Esmael Gadelha",
     "rating": 3
   },
@@ -64,7 +68,27 @@
     "rating": 2
   },
   {
+    "name": "Yago Lima",
+    "rating": 3
+  },
+  {
     "name": "Baiano",
     "rating": 2
-  }
+  },
+  {
+    "name": "Guilherme",
+    "rating": 4
+  },
+  {
+    "name": "Vitinho",
+    "rating": 3
+  },
+  {
+    "name": "Wesley",
+    "rating": 3
+  },
+  {
+    "name": "Heytor Henrique",
+    "rating": 4
+  } 
 ]

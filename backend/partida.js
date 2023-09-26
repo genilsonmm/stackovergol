@@ -8,7 +8,7 @@ function initPlayers() {
 }
 
 function fullRatingPlayers() {
-    const playersString = fs.readFileSync('./players.json')
+    const playersString = fs.readFileSync('./players_2023_09_26.json')
     const players = JSON.parse(playersString)
     const playesSorted = players.sort(function (a, b) { return a.rating - b.rating }).reverse()
     for (let t of playesSorted) {
