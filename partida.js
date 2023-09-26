@@ -1,13 +1,5 @@
 const _ = require('lodash');
 const fs = require("fs");
-const maxRating = 5
-
-function getPlayer() {
-    return {
-        rating: Math.floor(Math.random() * maxRating) + 1,
-        name: '',
-    }
-}
 
 function initPlayers() {
     const playersString = fs.readFileSync('./players.json')
@@ -37,7 +29,7 @@ function createMatch(numberOfTeams, playerPerTeam, players){
             } 
             
             let player = matchPlayer.pop()
-            if(player == undefined || teams[j].players.length === playerPerTeam){
+            if(player == undefined && teams[j].players.length === playerPerTeam){
                 break;
             } else if(player == undefined){
                 player = {
@@ -55,7 +47,7 @@ function createMatch(numberOfTeams, playerPerTeam, players){
         console.log(t)
     }
 
-   // labance(teams)
+   labance(teams)
 
     for(let t of teams){
         t.sum = _.sumBy(t.players, 'rating')
@@ -150,7 +142,7 @@ function createMatch2(numberOfTeams, playerPerTeam, players){
 
 
 const players = initPlayers()
-createMatch2(4,6,players)
+createMatch(4,6,players)
 
 
 
