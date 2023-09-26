@@ -2,9 +2,18 @@ const _ = require('lodash');
 const fs = require("fs");
 
 function initPlayers() {
-    const playersString = fs.readFileSync('./players.json')
+    const playersString = fs.readFileSync('./players_2023_09_26.json')
     const players = JSON.parse(playersString)
     return players.sort(function (a, b) { return a.rating - b.rating })
+}
+
+function fullRatingPlayers() {
+    const playersString = fs.readFileSync('./players.json')
+    const players = JSON.parse(playersString)
+    const playesSorted = players.sort(function (a, b) { return a.rating - b.rating }).reverse()
+    for (let t of playesSorted) {
+        console.log(t)
+     }
 }
 
 function createTeams(numberOfTeams) {
@@ -99,8 +108,8 @@ function labance(teams) {
 }
 
 function shuffleTeams(teams, playerPerTeam) {
-    
-    for(let i=0; i<playerPerTeam * 3; i++){
+    const repeat = 10
+    for(let i=0; i<playerPerTeam * repeat; i++){
         let randomTeamIndex = getRandomTeamIndex(teams)
         const randomPositionIndex = Math.floor(Math.random() * playerPerTeam);
 
@@ -126,9 +135,7 @@ function getRandomTeamIndex(teams){
     return Math.floor(Math.random() *_.size(teams))
 }
 
-const players = initPlayers()
-createMatch(4, 6, players)
+//const players = initPlayers()
+//createMatch(3, 6, players)
 
-
-
-
+fullRatingPlayers()
