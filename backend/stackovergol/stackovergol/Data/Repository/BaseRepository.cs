@@ -1,12 +1,16 @@
-﻿namespace stackovergol.Data.Repository
+﻿using AutoMapper;
+
+namespace stackovergol.Data.Repository
 {
     public class BaseRepository
     {
         protected readonly DataContext _dataContext;
+        protected readonly IMapper _mapper;
 
-        public BaseRepository(DataContext dataContext)
+        public BaseRepository(DataContext dataContext, IMapper mapper)
         {
-            this._dataContext = dataContext;
+            _dataContext = dataContext;
+            _mapper = mapper;
         }
     }
 }

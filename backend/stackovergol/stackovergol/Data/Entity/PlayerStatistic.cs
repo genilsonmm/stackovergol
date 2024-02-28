@@ -1,14 +1,18 @@
-﻿namespace stackovergol.Data.Entity
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace stackovergol.Data.Entity
 {
     public class PlayerMatchStatistic
     {
         public int PlayerMatchStatisticId { get; set; }
 
+        [Required]
         public int PlayerId { get; set; }
-        public Player Player { get; set; }
+        public virtual Player? Player { get; set; }
 
+        [Required]
         public int MatchId { get; set; }
-        public Match Match { get; set; }
+        public virtual Match? Match { get; set; }
 
         public int Gols { get; set; }
         public int Winners { get; set; }

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using stackovergol.Data;
 using stackovergol.Data.Entity;
@@ -12,9 +13,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+//AutoMapper
+builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddScoped<DataContext>();
 builder.Services.AddScoped<PlayerService>();
-builder.Services.AddScoped<Match>();
+builder.Services.AddScoped<MatchService>();
 
 var connection = builder.Configuration.GetValue<string>("MySqlConnection:MySqlConnectionString");
 builder.Services.AddDbContextPool<DataContext>(

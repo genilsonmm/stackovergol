@@ -1,41 +1,34 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using stackovergol.Data.Service;
+using stackovergol.Dto;
 
 namespace stackovergol.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class PlayerController : ControllerBase
+    public class PlayerController : BaseController
     {
-        // GET: api/<PlayerController>
+        private readonly PlayerService playerService;
+
+        public PlayerController(PlayerService playerService)
+        {
+            this.playerService = playerService;
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<PlayerResultDTO> Get()
         {
-            return new string[] { "value1", "value2" };
+            return playerService.GetAll();
         }
 
-        // GET api/<PlayerController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<PlayerController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult Post([FromBody] PlayerDTO player)
         {
+            var result = playerService.Add(player);
+            return Ok(new
+            {
+                result
+            });
         }
 
-        // PUT api/<PlayerController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<PlayerController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
