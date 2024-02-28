@@ -1,0 +1,6 @@
+@stackovergol_HostAddress = http://localhost:5079
+
+GET {{stackovergol_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

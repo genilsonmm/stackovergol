@@ -1,7 +1,0 @@
-{
-  "name": "stackovergol",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular-standalone"
-}
