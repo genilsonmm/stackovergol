@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using stackovergol.Data;
 using stackovergol.Data.Entity;
 using stackovergol.Data.Service;
+using stackovergol.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,7 +40,10 @@ if (app.Environment.IsDevelopment())
 
 //app.UseHttpsRedirection();
 
+
 app.UseAuthorization();
+
+app.UseMiddleware<GlobalExceptionMiddleware>();
 
 app.MapControllers();
 

@@ -102,6 +102,9 @@ namespace stackovergol.Migrations
 
                     b.HasIndex("TeamId");
 
+                    b.HasIndex("Username")
+                        .IsUnique();
+
                     b.ToTable("Player");
                 });
 

@@ -11,8 +11,8 @@ using stackovergol.Data;
 namespace stackovergol.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240228183822_annotations")]
-    partial class annotations
+    [Migration("20240301004018_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -90,6 +90,9 @@ namespace stackovergol.Migrations
                         .HasMaxLength(12)
                         .HasColumnType("varchar(12)");
 
+                    b.Property<string>("Photo")
+                        .HasColumnType("longtext");
+
                     b.Property<int?>("TeamId")
                         .HasColumnType("int");
 
@@ -101,6 +104,9 @@ namespace stackovergol.Migrations
                     b.HasKey("PlayerId");
 
                     b.HasIndex("TeamId");
+
+                    b.HasIndex("Username")
+                        .IsUnique();
 
                     b.ToTable("Player");
                 });

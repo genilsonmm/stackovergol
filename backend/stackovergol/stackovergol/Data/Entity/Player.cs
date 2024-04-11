@@ -1,7 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace stackovergol.Data.Entity
 {
+    [Index(nameof(Username), IsUnique = true)]
     public class Player
     {
         public int PlayerId { get; set; }
@@ -24,6 +26,10 @@ namespace stackovergol.Data.Entity
         public string? Email { get; set; }
 
         public string? Photo { get; set; }
+
+        [Required]
+        [MaxLength(5)]
+        public int Rating { get; set; }
 
         [Required]
         public bool IsMember { get; set; }

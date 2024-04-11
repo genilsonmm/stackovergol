@@ -23,12 +23,15 @@ namespace stackovergol.Controllers
         [HttpPost]
         public ActionResult Post([FromBody] PlayerDTO player)
         {
-            var result = playerService.Add(player);
-            return Ok(new
-            {
-                result
-            });
+            playerService.Add(player);
+            return Ok();
         }
 
+        [HttpPut]
+        public ActionResult Put([FromBody] PlayerDTO player)
+        {
+            playerService.Update(player);
+            return Ok();
+        }
     }
 }

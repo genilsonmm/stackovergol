@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using MySqlConnector;
 using stackovergol.Data.Entity;
 using stackovergol.Data.Repository;
 using stackovergol.Dto;
+using stackovergol.Exceptions;
 
 namespace stackovergol.Data.Service
 {
@@ -19,11 +22,34 @@ namespace stackovergol.Data.Service
                 : new List<PlayerResultDTO>();
         }
 
-        public int Add(PlayerDTO playerDto)
+        public void Add(PlayerDTO playerDto)
         {
-            var player = _mapper.Map<Player>(playerDto);
-            _dataContext.Player.Add(player);
+            try
+            {
+                _dataContext.Player.Add(ToEntity(playerDto));
+                _dataContext.SaveChanges();
+            }catch(Exception ex)
+            {
+                if(ex.InnerException.Message.Contains("Duplicate entry"))
+                {
+                    throw new DuplicateException("O campo username é único");
+                }
+                throw new Exception("Erro ao cadastrar novo jogador");
+            }
+        }
+
+        public int Update(PlayerDTO playerDto)
+        {
+            if (!_dataContext.Player.Any(p => p.PlayerId == playerDto.PlayerId))
+                throw new NotFoundException("Jogador não encontrado");
+
+            _dataContext.Entry(ToEntity(playerDto)).State = EntityState.Modified;
             return _dataContext.SaveChanges();
+        }
+
+        private Player ToEntity(PlayerDTO playerDto)
+        {
+            return _mapper.Map<Player>(playerDto);
         }
     }
 }
