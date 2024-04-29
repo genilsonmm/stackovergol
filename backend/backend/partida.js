@@ -1,7 +1,7 @@
 const _ = require('lodash');
 const fs = require("fs");
 
-const filePath = './players_2024_03_25.json';
+const filePath = './players_2024_04_23.json';
 
 function initPlayers() {
     const playersString = fs.readFileSync(filePath)
@@ -23,8 +23,7 @@ function fullRatingPlayers() {
 function getTeamName(index){
     if(index == 1){
         return 'A (Azul)'
-    }
-    else if(index == 2){
+    } else if(index == 2){
         return 'B (Verde)'
     } else if(index == 3){
         return 'C (Laranja)'
@@ -152,5 +151,5 @@ function getRandomTeamIndex(teams) {
     return Math.floor(Math.random() * _.size(teams))
 }
 
-fullRatingPlayers()
+//fullRatingPlayers()
 createMatch(3, 6, initPlayers())
