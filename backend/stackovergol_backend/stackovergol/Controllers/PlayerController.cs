@@ -16,10 +16,7 @@ namespace stackovergol.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<PlayerResultDTO> Get()
-        {
-            return playerService.GetAll();
-        }
+        public IEnumerable<PlayerResponseDTO> Get() => playerService.GetAll();
 
         [HttpPost]
         public ActionResult Post([FromBody] PlayerDTO player) => Ok(playerService.Add(player));

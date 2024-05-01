@@ -1,0 +1,208 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Programming\\MyCompany\\stackovergol\\backend\\stackovergol\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{DF460984-D701-4BFB-888C-C0C87464AE3C}|stackovergol\\stackovergol.csproj|d:\\programming\\mycompany\\stackovergol\\backend\\stackovergol\\stackovergol\\data\\entity\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF460984-D701-4BFB-888C-C0C87464AE3C}|stackovergol\\stackovergol.csproj|solutionrelative:stackovergol\\data\\entity\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF460984-D701-4BFB-888C-C0C87464AE3C}|stackovergol\\stackovergol.csproj|d:\\programming\\mycompany\\stackovergol\\backend\\stackovergol\\stackovergol\\data\\service\\playerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF460984-D701-4BFB-888C-C0C87464AE3C}|stackovergol\\stackovergol.csproj|solutionrelative:stackovergol\\data\\service\\playerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF460984-D701-4BFB-888C-C0C87464AE3C}|stackovergol\\stackovergol.csproj|d:\\programming\\mycompany\\stackovergol\\backend\\stackovergol\\stackovergol\\middlewares\\globalexceptionmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF460984-D701-4BFB-888C-C0C87464AE3C}|stackovergol\\stackovergol.csproj|solutionrelative:stackovergol\\middlewares\\globalexceptionmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF460984-D701-4BFB-888C-C0C87464AE3C}|stackovergol\\stackovergol.csproj|d:\\programming\\mycompany\\stackovergol\\backend\\stackovergol\\stackovergol\\controllers\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF460984-D701-4BFB-888C-C0C87464AE3C}|stackovergol\\stackovergol.csproj|solutionrelative:stackovergol\\controllers\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF460984-D701-4BFB-888C-C0C87464AE3C}|stackovergol\\stackovergol.csproj|d:\\programming\\mycompany\\stackovergol\\backend\\stackovergol\\stackovergol\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF460984-D701-4BFB-888C-C0C87464AE3C}|stackovergol\\stackovergol.csproj|solutionrelative:stackovergol\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF460984-D701-4BFB-888C-C0C87464AE3C}|stackovergol\\stackovergol.csproj|d:\\programming\\mycompany\\stackovergol\\backend\\stackovergol\\stackovergol\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{DF460984-D701-4BFB-888C-C0C87464AE3C}|stackovergol\\stackovergol.csproj|solutionrelative:stackovergol\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF460984-D701-4BFB-888C-C0C87464AE3C}|stackovergol\\stackovergol.csproj|d:\\programming\\mycompany\\stackovergol\\backend\\stackovergol\\stackovergol\\data\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF460984-D701-4BFB-888C-C0C87464AE3C}|stackovergol\\stackovergol.csproj|solutionrelative:stackovergol\\data\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF460984-D701-4BFB-888C-C0C87464AE3C}|stackovergol\\stackovergol.csproj|d:\\programming\\mycompany\\stackovergol\\backend\\stackovergol\\stackovergol\\dto\\playerresultdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF460984-D701-4BFB-888C-C0C87464AE3C}|stackovergol\\stackovergol.csproj|solutionrelative:stackovergol\\dto\\playerresultdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF460984-D701-4BFB-888C-C0C87464AE3C}|stackovergol\\stackovergol.csproj|d:\\programming\\mycompany\\stackovergol\\backend\\stackovergol\\stackovergol\\dto\\playerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF460984-D701-4BFB-888C-C0C87464AE3C}|stackovergol\\stackovergol.csproj|solutionrelative:stackovergol\\dto\\playerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF460984-D701-4BFB-888C-C0C87464AE3C}|stackovergol\\stackovergol.csproj|d:\\programming\\mycompany\\stackovergol\\backend\\stackovergol\\stackovergol\\data\\service\\matchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF460984-D701-4BFB-888C-C0C87464AE3C}|stackovergol\\stackovergol.csproj|solutionrelative:stackovergol\\data\\service\\matchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DF460984-D701-4BFB-888C-C0C87464AE3C}|stackovergol\\stackovergol.csproj|d:\\programming\\mycompany\\stackovergol\\backend\\stackovergol\\stackovergol\\dto\\systemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DF460984-D701-4BFB-888C-C0C87464AE3C}|stackovergol\\stackovergol.csproj|solutionrelative:stackovergol\\dto\\systemcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 175,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GlobalExceptionMiddleware.cs",
+              "DocumentMoniker": "D:\\Programming\\MyCompany\\stackovergol\\backend\\stackovergol\\stackovergol\\Middlewares\\GlobalExceptionMiddleware.cs",
+              "RelativeDocumentMoniker": "stackovergol\\Middlewares\\GlobalExceptionMiddleware.cs",
+              "ToolTip": "D:\\Programming\\MyCompany\\stackovergol\\backend\\stackovergol\\stackovergol\\Middlewares\\GlobalExceptionMiddleware.cs",
+              "RelativeToolTip": "stackovergol\\Middlewares\\GlobalExceptionMiddleware.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAiwCgAAABgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-01T22:20:22.113Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PlayerController.cs",
+              "DocumentMoniker": "D:\\Programming\\MyCompany\\stackovergol\\backend\\stackovergol\\stackovergol\\Controllers\\PlayerController.cs",
+              "RelativeDocumentMoniker": "stackovergol\\Controllers\\PlayerController.cs",
+              "ToolTip": "D:\\Programming\\MyCompany\\stackovergol\\backend\\stackovergol\\stackovergol\\Controllers\\PlayerController.cs",
+              "RelativeToolTip": "stackovergol\\Controllers\\PlayerController.cs",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAQwBoAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-28T17:56:39.242Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Programming\\MyCompany\\stackovergol\\backend\\stackovergol\\stackovergol\\Program.cs",
+              "RelativeDocumentMoniker": "stackovergol\\Program.cs",
+              "ToolTip": "D:\\Programming\\MyCompany\\stackovergol\\backend\\stackovergol\\stackovergol\\Program.cs",
+              "RelativeToolTip": "stackovergol\\Program.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAQwC4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-28T19:10:33.909Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "MatchService.cs",
+              "DocumentMoniker": "D:\\Programming\\MyCompany\\stackovergol\\backend\\stackovergol\\stackovergol\\Data\\Service\\MatchService.cs",
+              "RelativeDocumentMoniker": "stackovergol\\Data\\Service\\MatchService.cs",
+              "ToolTip": "D:\\Programming\\MyCompany\\stackovergol\\backend\\stackovergol\\stackovergol\\Data\\Service\\MatchService.cs",
+              "RelativeToolTip": "stackovergol\\Data\\Service\\MatchService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAABXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-28T19:10:00.33Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DataContext.cs",
+              "DocumentMoniker": "D:\\Programming\\MyCompany\\stackovergol\\backend\\stackovergol\\stackovergol\\Data\\DataContext.cs",
+              "RelativeDocumentMoniker": "stackovergol\\Data\\DataContext.cs",
+              "ToolTip": "D:\\Programming\\MyCompany\\stackovergol\\backend\\stackovergol\\stackovergol\\Data\\DataContext.cs",
+              "RelativeToolTip": "stackovergol\\Data\\DataContext.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAxwBYAAAAzAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-01T00:27:21.276Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "SystemController.cs",
+              "DocumentMoniker": "D:\\Programming\\MyCompany\\stackovergol\\backend\\stackovergol\\stackovergol\\Dto\\SystemController.cs",
+              "RelativeDocumentMoniker": "stackovergol\\Dto\\SystemController.cs",
+              "ToolTip": "D:\\Programming\\MyCompany\\stackovergol\\backend\\stackovergol\\stackovergol\\Dto\\SystemController.cs",
+              "RelativeToolTip": "stackovergol\\Dto\\SystemController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-28T18:11:09.796Z"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 225,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Player.cs",
+              "DocumentMoniker": "D:\\Programming\\MyCompany\\stackovergol\\backend\\stackovergol\\stackovergol\\Data\\Entity\\Player.cs",
+              "RelativeDocumentMoniker": "stackovergol\\Data\\Entity\\Player.cs",
+              "ToolTip": "D:\\Programming\\MyCompany\\stackovergol\\backend\\stackovergol\\stackovergol\\Data\\Entity\\Player.cs",
+              "RelativeToolTip": "stackovergol\\Data\\Entity\\Player.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAA4AAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-02T00:08:24.736Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PlayerService.cs",
+              "DocumentMoniker": "D:\\Programming\\MyCompany\\stackovergol\\backend\\stackovergol\\stackovergol\\Data\\Service\\PlayerService.cs",
+              "RelativeDocumentMoniker": "stackovergol\\Data\\Service\\PlayerService.cs",
+              "ToolTip": "D:\\Programming\\MyCompany\\stackovergol\\backend\\stackovergol\\stackovergol\\Data\\Service\\PlayerService.cs",
+              "RelativeToolTip": "stackovergol\\Data\\Service\\PlayerService.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAxwB8AAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-28T18:57:27.904Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "D:\\Programming\\MyCompany\\stackovergol\\backend\\stackovergol\\stackovergol\\appsettings.json",
+              "RelativeDocumentMoniker": "stackovergol\\appsettings.json",
+              "ToolTip": "D:\\Programming\\MyCompany\\stackovergol\\backend\\stackovergol\\stackovergol\\appsettings.json",
+              "RelativeToolTip": "stackovergol\\appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-04-01T21:56:31.122Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "PlayerResultDTO.cs",
+              "DocumentMoniker": "D:\\Programming\\MyCompany\\stackovergol\\backend\\stackovergol\\stackovergol\\Dto\\PlayerResultDTO.cs",
+              "RelativeDocumentMoniker": "stackovergol\\Dto\\PlayerResultDTO.cs",
+              "ToolTip": "D:\\Programming\\MyCompany\\stackovergol\\backend\\stackovergol\\stackovergol\\Dto\\PlayerResultDTO.cs",
+              "RelativeToolTip": "stackovergol\\Dto\\PlayerResultDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAbAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-28T19:36:22.075Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "PlayerDTO.cs",
+              "DocumentMoniker": "D:\\Programming\\MyCompany\\stackovergol\\backend\\stackovergol\\stackovergol\\Dto\\PlayerDTO.cs",
+              "RelativeDocumentMoniker": "stackovergol\\Dto\\PlayerDTO.cs",
+              "ToolTip": "D:\\Programming\\MyCompany\\stackovergol\\backend\\stackovergol\\stackovergol\\Dto\\PlayerDTO.cs",
+              "RelativeToolTip": "stackovergol\\Dto\\PlayerDTO.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwA4AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-02-28T18:18:44.273Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

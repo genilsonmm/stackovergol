@@ -36,6 +36,12 @@ namespace stackovergol.Data.Entity
 
         [Required]
         public bool IsAdmin { get; set; }
+        
+        [Required]
+        public bool IsGoalkeeper { get; set; }
+
+        [Required]
+        public bool Enabled { get; set; }
 
         [Required]
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

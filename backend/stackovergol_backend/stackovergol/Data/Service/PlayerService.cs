@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using MySqlConnector;
 using stackovergol.Data.Entity;
 using stackovergol.Data.Repository;
 using stackovergol.Dto;
@@ -14,12 +13,12 @@ namespace stackovergol.Data.Service
         public PlayerService(DataContext dataContext, IMapper mapper) 
             : base(dataContext, mapper) { }
     
-        public List<PlayerResultDTO> GetAll()
+        public List<PlayerResponseDTO> GetAll()
         {
-            var players = _dataContext.Player.OrderBy(p => p.IsMember == true).OrderBy(p => p.Name).ToList();
+            var players = _dataContext.Player.Where(p=>p.Enabled==true).OrderBy(p => p.IsMember == true).OrderBy(p => p.Name).ToList();
             return players is List<Player> 
-                ? _mapper.Map<List<PlayerResultDTO>>(players) 
-                : new List<PlayerResultDTO>();
+                ? _mapper.Map<List<PlayerResponseDTO>>(players) 
+                : new List<PlayerResponseDTO>();
         }
 
         public int Add(PlayerDTO playerDto)
@@ -27,6 +26,7 @@ namespace stackovergol.Data.Service
             try
             {
                 Player player = ToEntity(playerDto);
+                player.Enabled = true;
                 _dataContext.Player.Add(player);
                 _dataContext.SaveChanges();
                 return player.PlayerId;

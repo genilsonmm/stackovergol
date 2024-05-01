@@ -29,6 +29,7 @@ namespace stackovergol.Data
         public DbSet<Team> Team { get; set; }
         public DbSet<Event> Event { get; set; }
         public DbSet<EventPlayer> EventPlayer { get; set; }
+        public DbSet<TeamMatch> TeamMatch { get; set; }
 
     }
 }

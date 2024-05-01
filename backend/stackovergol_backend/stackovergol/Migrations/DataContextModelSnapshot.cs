@@ -105,7 +105,13 @@ namespace stackovergol.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("tinyint(1)");
+
                     b.Property<bool>("IsAdmin")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool>("IsGoalkeeper")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<bool>("IsMember")
@@ -131,17 +137,12 @@ namespace stackovergol.Migrations
                         .HasMaxLength(5)
                         .HasColumnType("int");
 
-                    b.Property<int?>("TeamId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
                     b.HasKey("PlayerId");
-
-                    b.HasIndex("TeamId");
 
                     b.HasIndex("Username")
                         .IsUnique();
@@ -185,17 +186,41 @@ namespace stackovergol.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("MatchId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Name")
                         .HasColumnType("int");
 
                     b.HasKey("TeamId");
 
-                    b.HasIndex("MatchId");
+                    b.HasIndex("Name")
+                        .IsUnique();
 
                     b.ToTable("Team");
+                });
+
+            modelBuilder.Entity("stackovergol.Data.Entity.TeamMatch", b =>
+                {
+                    b.Property<int>("TeamMatchId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("MatchId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PlayerId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeamId")
+                        .HasColumnType("int");
+
+                    b.HasKey("TeamMatchId");
+
+                    b.HasIndex("MatchId");
+
+                    b.HasIndex("PlayerId");
+
+                    b.HasIndex("TeamId");
+
+                    b.ToTable("TeamMatch");
                 });
 
             modelBuilder.Entity("stackovergol.Data.Entity.EventPlayer", b =>
@@ -244,13 +269,6 @@ namespace stackovergol.Migrations
                     b.Navigation("TeamRight");
                 });
 
-            modelBuilder.Entity("stackovergol.Data.Entity.Player", b =>
-                {
-                    b.HasOne("stackovergol.Data.Entity.Team", null)
-                        .WithMany("Players")
-                        .HasForeignKey("TeamId");
-                });
-
             modelBuilder.Entity("stackovergol.Data.Entity.PlayerMatchStatistic", b =>
                 {
                     b.HasOne("stackovergol.Data.Entity.Match", "Match")
@@ -270,7 +288,7 @@ namespace stackovergol.Migrations
                     b.Navigation("Player");
                 });
 
-            modelBuilder.Entity("stackovergol.Data.Entity.Team", b =>
+            modelBuilder.Entity("stackovergol.Data.Entity.TeamMatch", b =>
                 {
                     b.HasOne("stackovergol.Data.Entity.Match", "Match")
                         .WithMany()
@@ -278,12 +296,23 @@ namespace stackovergol.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Match");
-                });
+                    b.HasOne("stackovergol.Data.Entity.Player", "Player")
+                        .WithMany()
+                        .HasForeignKey("PlayerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-            modelBuilder.Entity("stackovergol.Data.Entity.Team", b =>
-                {
-                    b.Navigation("Players");
+                    b.HasOne("stackovergol.Data.Entity.Team", "Team")
+                        .WithMany()
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Match");
+
+                    b.Navigation("Player");
+
+                    b.Navigation("Team");
                 });
 #pragma warning restore 612, 618
         }

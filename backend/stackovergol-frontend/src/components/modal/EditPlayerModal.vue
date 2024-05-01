@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-12">
                             <label for="exampleInputPassword1">Rating
                                 <span class="badge rounded-pill bg-danger">
                                     {{ props.selectedPlayer?.rating }}
@@ -51,13 +51,17 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-4">
                             <input type="checkbox" v-model="props.selectedPlayer.isMember" class="form-check-input">
-                            <label class="form-check-label" for="exampleCheck1">Membro</label>
+                            <label class="form-check-label" for="exampleCheck1">&nbsp Membro</label>
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
                             <input type="checkbox" v-model="props.selectedPlayer.isAdmin" class="form-check-input">
-                            <label class="form-check-label" for="exampleCheck1">Administrador</label>
+                            <label class="form-check-label" for="exampleCheck1">&nbsp Administrador</label>
+                        </div>
+                        <div class="col-4">
+                            <input type="checkbox" v-model="props.selectedPlayer.isGoalkeeper" class="form-check-input">
+                            <label class="form-check-label label" for="exampleCheck1">&nbsp Goleiro</label>
                         </div>
                     </div>
                 </div>
@@ -116,3 +120,11 @@ defineExpose({
 })
 
 </script>
+
+<style scoped>
+@media screen and (max-width: 510px) {
+    .label{
+        font-size: 14px;
+    }
+}
+</style>

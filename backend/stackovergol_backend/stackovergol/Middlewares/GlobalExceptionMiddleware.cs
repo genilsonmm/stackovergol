@@ -16,7 +16,6 @@ namespace stackovergol.Middlewares
             this._next = next;
         }
 
-
         public async Task InvokeAsync(HttpContext context)
         {
             try

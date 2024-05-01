@@ -67,7 +67,8 @@ const selectedPlayer = ref({
   phone: '',
   rating: 0,
   isMember: false,
-  isAdmin: false
+  isAdmin: false,
+  isGoalkeeper: false
 })
 
 //Exposed

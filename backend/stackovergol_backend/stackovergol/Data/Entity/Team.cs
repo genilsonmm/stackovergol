@@ -1,18 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace stackovergol.Data.Entity
 {
+    [Index(nameof(Name), IsUnique = true)]
     public class Team
     {
         public int TeamId { get; set; }
 
         [Required]
         public int Name { get; set; }
-
-        [Required]
-        public int MatchId { get; set; }
-        public virtual Match? Match { get; set; }
-
-        public ICollection<Player>? Players { get; set; }
     }
 }

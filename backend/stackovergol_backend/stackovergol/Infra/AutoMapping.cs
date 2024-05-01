@@ -11,7 +11,7 @@ namespace stackovergol.Infra
             CreateMap<Player, PlayerDTO>();
             CreateMap<PlayerDTO, Player>();
 
-            CreateMap<Player, PlayerResultDTO>();
+            CreateMap<Player, PlayerResponseDTO>();
         }
     }
 }
