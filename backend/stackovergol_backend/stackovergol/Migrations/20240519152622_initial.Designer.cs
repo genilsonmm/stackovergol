@@ -11,8 +11,8 @@ using stackovergol.Data;
 namespace stackovergol.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240501135632_team-macth")]
-    partial class teammacth
+    [Migration("20240519152622_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -111,13 +111,7 @@ namespace stackovergol.Migrations
                     b.Property<bool>("Enabled")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<bool>("IsAdmin")
-                        .HasColumnType("tinyint(1)");
-
                     b.Property<bool>("IsGoalkeeper")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool>("IsMember")
                         .HasColumnType("tinyint(1)");
 
                     b.Property<string>("Name")
@@ -140,12 +134,17 @@ namespace stackovergol.Migrations
                         .HasMaxLength(5)
                         .HasColumnType("int");
 
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
                     b.HasKey("PlayerId");
+
+                    b.HasIndex("RoleId");
 
                     b.HasIndex("Username")
                         .IsUnique();
@@ -181,6 +180,21 @@ namespace stackovergol.Migrations
                     b.HasIndex("PlayerId");
 
                     b.ToTable("PlayerMatchStatistic");
+                });
+
+            modelBuilder.Entity("stackovergol.Data.Entity.Role", b =>
+                {
+                    b.Property<int>("RoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("RoleId");
+
+                    b.ToTable("Roles");
                 });
 
             modelBuilder.Entity("stackovergol.Data.Entity.Team", b =>
@@ -270,6 +284,17 @@ namespace stackovergol.Migrations
                     b.Navigation("TeamLeft");
 
                     b.Navigation("TeamRight");
+                });
+
+            modelBuilder.Entity("stackovergol.Data.Entity.Player", b =>
+                {
+                    b.HasOne("stackovergol.Data.Entity.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
                 });
 
             modelBuilder.Entity("stackovergol.Data.Entity.PlayerMatchStatistic", b =>

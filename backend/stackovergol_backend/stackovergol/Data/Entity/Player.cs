@@ -15,7 +15,7 @@ namespace stackovergol.Data.Entity
         [StringLength(100)]
         public required string Username { get; set; }
 
-        [MaxLength(10), MinLength(6)]
+        [MaxLength(100), MinLength(6)]
         [Required]
         public required string Password { get; set; }
 
@@ -30,13 +30,12 @@ namespace stackovergol.Data.Entity
         [Required]
         [MaxLength(5)]
         public int Rating { get; set; }
-
-        [Required]
-        public bool IsMember { get; set; }
-
-        [Required]
-        public bool IsAdmin { get; set; }
         
+        [Required]
+        public int RoleId { get; set; }
+
+        public virtual Role Role { get; set; }
+
         [Required]
         public bool IsGoalkeeper { get; set; }
 

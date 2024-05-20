@@ -8,10 +8,23 @@ namespace stackovergol.Infra
     {
         public AutoMapping()
         {
-            CreateMap<Player, PlayerDTO>();
+            CreateMap<Player, PlayerAuthDTO>()
+                .ForMember(dest => dest.Role, opt => opt.MapFrom(src => (src.Role.Name)));
             CreateMap<PlayerDTO, Player>();
 
-            CreateMap<Player, PlayerResponseDTO>();
+            CreateMap<Player, PlayerDTO>();
+
+            CreateMap<PlayerDTO, Player>()
+                .ForMember(dest => dest.Role, opt=>opt.Ignore());
+
+            CreateMap<Player, PlayerResponseDTO>()
+                .ForMember(dest => dest.Role, opt => opt.MapFrom(src => (src.Role.Name)));
+
+            CreateMap<EventResponse, Event>();
+            CreateMap<Event, EventResponse>();
+
+            CreateMap<EventRequest, Event>();
+            CreateMap<Event, EventRequest>();
         }
     }
 }

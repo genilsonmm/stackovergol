@@ -4,6 +4,7 @@ using stackovergol.Data.Entity;
 using stackovergol.Data.Repository;
 using stackovergol.Dto;
 using stackovergol.Exceptions;
+using stackovergol.Infra;
 
 namespace stackovergol.Data.Service
 {
@@ -15,7 +16,7 @@ namespace stackovergol.Data.Service
     
         public List<PlayerResponseDTO> GetAll()
         {
-            var players = _dataContext.Player.Where(p=>p.Enabled==true).OrderBy(p => p.IsMember == true).OrderBy(p => p.Name).ToList();
+            var players = _dataContext.Player.Where(p=>p.Enabled==true).OrderBy(p => p.Role.Name.Equals(Constants.MEMBER)).OrderBy(p => p.Name).Include(r=>r.Role).ToList();
             return players is List<Player> 
                 ? _mapper.Map<List<PlayerResponseDTO>>(players) 
                 : new List<PlayerResponseDTO>();
@@ -25,8 +26,11 @@ namespace stackovergol.Data.Service
         {
             try
             {
+                Role role = _dataContext.Roles.Where(r => r.Name.Equals(playerDto.Role)).FirstOrDefault();
                 Player player = ToEntity(playerDto);
                 player.Enabled = true;
+                player.RoleId = role.RoleId;
+
                 _dataContext.Player.Add(player);
                 _dataContext.SaveChanges();
                 return player.PlayerId;
@@ -47,6 +51,17 @@ namespace stackovergol.Data.Service
 
             _dataContext.Entry(ToEntity(playerDto)).State = EntityState.Modified;
             return _dataContext.SaveChanges();
+        }
+
+        public PlayerAuthDTO GetByCredentials(string username, string password)
+        {
+            var player = _dataContext.Player.Include(r => r.Role)
+                .Where(p => p.Enabled==true && p.Username.Equals(username) && p.Password.Equals(password)).FirstOrDefault();
+            
+            if (player == null)
+                throw new NotFoundException("Jogador não encontrado");
+
+            return _mapper.Map<PlayerAuthDTO>(player);
         }
 
         private Player ToEntity(PlayerDTO playerDto)

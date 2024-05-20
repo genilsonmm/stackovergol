@@ -30,6 +30,6 @@ namespace stackovergol.Data
         public DbSet<Event> Event { get; set; }
         public DbSet<EventPlayer> EventPlayer { get; set; }
         public DbSet<TeamMatch> TeamMatch { get; set; }
-
+        public DbSet<Role> Roles { get; set; }
     }
 }

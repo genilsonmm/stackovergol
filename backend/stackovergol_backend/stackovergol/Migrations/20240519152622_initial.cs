@@ -31,22 +31,66 @@ namespace stackovergol.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "EventPlayer",
+                name: "Roles",
                 columns: table => new
                 {
-                    EventPlayerId = table.Column<int>(type: "int", nullable: false)
+                    RoleId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    EventId = table.Column<int>(type: "int", nullable: false),
-                    PlayerId = table.Column<int>(type: "int", nullable: false)
+                    Name = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EventPlayer", x => x.EventPlayerId);
+                    table.PrimaryKey("PK_Roles", x => x.RoleId);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Team",
+                columns: table => new
+                {
+                    TeamId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Team", x => x.TeamId);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Player",
+                columns: table => new
+                {
+                    PlayerId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Username = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Password = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Phone = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Email = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Photo = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Rating = table.Column<int>(type: "int", maxLength: 5, nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false),
+                    IsGoalkeeper = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    Enabled = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Player", x => x.PlayerId);
                     table.ForeignKey(
-                        name: "FK_EventPlayer_Event_EventId",
-                        column: x => x.EventId,
-                        principalTable: "Event",
-                        principalColumn: "EventId",
+                        name: "FK_Player_Roles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "Roles",
+                        principalColumn: "RoleId",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
@@ -73,64 +117,45 @@ namespace stackovergol.Migrations
                         principalTable: "Event",
                         principalColumn: "EventId",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Team",
-                columns: table => new
-                {
-                    TeamId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<int>(type: "int", nullable: false),
-                    MatchId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Team", x => x.TeamId);
                     table.ForeignKey(
-                        name: "FK_Team_Match_MatchId",
-                        column: x => x.MatchId,
-                        principalTable: "Match",
-                        principalColumn: "MatchId",
+                        name: "FK_Match_Team_TeamLeftId",
+                        column: x => x.TeamLeftId,
+                        principalTable: "Team",
+                        principalColumn: "TeamId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Match_Team_TeamRightId",
+                        column: x => x.TeamRightId,
+                        principalTable: "Team",
+                        principalColumn: "TeamId",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Player",
+                name: "EventPlayer",
                 columns: table => new
                 {
-                    PlayerId = table.Column<int>(type: "int", nullable: false)
+                    EventPlayerId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Username = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Password = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Phone = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Email = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Photo = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Rating = table.Column<int>(type: "int", maxLength: 5, nullable: false),
-                    IsMember = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    IsAdmin = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    IsGoalkeeper = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    Enabled = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    TeamId = table.Column<int>(type: "int", nullable: true)
+                    EventId = table.Column<int>(type: "int", nullable: false),
+                    PlayerId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Player", x => x.PlayerId);
+                    table.PrimaryKey("PK_EventPlayer", x => x.EventPlayerId);
                     table.ForeignKey(
-                        name: "FK_Player_Team_TeamId",
-                        column: x => x.TeamId,
-                        principalTable: "Team",
-                        principalColumn: "TeamId");
+                        name: "FK_EventPlayer_Event_EventId",
+                        column: x => x.EventId,
+                        principalTable: "Event",
+                        principalColumn: "EventId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EventPlayer_Player_PlayerId",
+                        column: x => x.PlayerId,
+                        principalTable: "Player",
+                        principalColumn: "PlayerId",
+                        onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -164,6 +189,40 @@ namespace stackovergol.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
+            migrationBuilder.CreateTable(
+                name: "TeamMatch",
+                columns: table => new
+                {
+                    TeamMatchId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    MatchId = table.Column<int>(type: "int", nullable: false),
+                    TeamId = table.Column<int>(type: "int", nullable: false),
+                    PlayerId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TeamMatch", x => x.TeamMatchId);
+                    table.ForeignKey(
+                        name: "FK_TeamMatch_Match_MatchId",
+                        column: x => x.MatchId,
+                        principalTable: "Match",
+                        principalColumn: "MatchId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TeamMatch_Player_PlayerId",
+                        column: x => x.PlayerId,
+                        principalTable: "Player",
+                        principalColumn: "PlayerId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TeamMatch_Team_TeamId",
+                        column: x => x.TeamId,
+                        principalTable: "Team",
+                        principalColumn: "TeamId",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.CreateIndex(
                 name: "IX_EventPlayer_EventId",
                 table: "EventPlayer",
@@ -190,9 +249,9 @@ namespace stackovergol.Migrations
                 column: "TeamRightId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Player_TeamId",
+                name: "IX_Player_RoleId",
                 table: "Player",
-                column: "TeamId");
+                column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Player_Username",
@@ -211,55 +270,41 @@ namespace stackovergol.Migrations
                 column: "PlayerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Team_MatchId",
+                name: "IX_Team_Name",
                 table: "Team",
+                column: "Name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TeamMatch_MatchId",
+                table: "TeamMatch",
                 column: "MatchId");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_EventPlayer_Player_PlayerId",
-                table: "EventPlayer",
-                column: "PlayerId",
-                principalTable: "Player",
-                principalColumn: "PlayerId",
-                onDelete: ReferentialAction.Cascade);
+            migrationBuilder.CreateIndex(
+                name: "IX_TeamMatch_PlayerId",
+                table: "TeamMatch",
+                column: "PlayerId");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_Match_Team_TeamLeftId",
-                table: "Match",
-                column: "TeamLeftId",
-                principalTable: "Team",
-                principalColumn: "TeamId",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Match_Team_TeamRightId",
-                table: "Match",
-                column: "TeamRightId",
-                principalTable: "Team",
-                principalColumn: "TeamId",
-                onDelete: ReferentialAction.Cascade);
+            migrationBuilder.CreateIndex(
+                name: "IX_TeamMatch_TeamId",
+                table: "TeamMatch",
+                column: "TeamId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Match_Event_EventId",
-                table: "Match");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Match_Team_TeamLeftId",
-                table: "Match");
-
-            migrationBuilder.DropForeignKey(
-                name: "FK_Match_Team_TeamRightId",
-                table: "Match");
-
             migrationBuilder.DropTable(
                 name: "EventPlayer");
 
             migrationBuilder.DropTable(
                 name: "PlayerMatchStatistic");
+
+            migrationBuilder.DropTable(
+                name: "TeamMatch");
+
+            migrationBuilder.DropTable(
+                name: "Match");
 
             migrationBuilder.DropTable(
                 name: "Player");
@@ -271,7 +316,7 @@ namespace stackovergol.Migrations
                 name: "Team");
 
             migrationBuilder.DropTable(
-                name: "Match");
+                name: "Roles");
         }
     }
 }

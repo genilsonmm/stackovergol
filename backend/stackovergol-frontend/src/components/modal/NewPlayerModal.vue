@@ -108,6 +108,7 @@ function open(){
 }
 
 function save(){
+    playerData.value['role'] = playerData.value.isAdmin ? 'ADMIN' : 'MEMBER'
     emitEvent('createPlayerEvent', playerData.value)
 }
 

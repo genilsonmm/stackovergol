@@ -28,7 +28,7 @@
           </span>
         </td>
         <td>{{ player.name }}</td>
-        <td v-if="player.isMember">
+        <td v-if="player.role == 'MEMBER' || player.role == 'ADMIN'">
           <i class="bi bi-person-heart"></i>
           Mensalista
         </td>
@@ -52,10 +52,8 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import playerService from '@/services/playerService'
-
 import EditPlayerModal from '@/components/modal/EditPlayerModal.vue'
 import NewPlayerModal from '@/components/modal/NewPlayerModal.vue'
-
 import notification from '@/services/notificationService'
 
 const players = ref([])
@@ -66,8 +64,7 @@ const selectedPlayer = ref({
   email: '',
   phone: '',
   rating: 0,
-  isMember: false,
-  isAdmin: false,
+  role: '',
   isGoalkeeper: false
 })
 
@@ -99,10 +96,10 @@ function updatePlayer(player) {
         editPlayerModal.value.close()
         getAllPlayers()
       } else {
-        alert('Não foi possível atualizar os dados do usuário. ' + response.data)
+        notification.error('Erro', 'Não foi possível atualizar os dados do usuário. ' + response.data)
       }
     })
-    .catch(error => alert('Falha ao enviar os dados. ' + error))
+    .catch(error => notification.error('Falha','Falha ao enviar os dados. ' + error))
 }
 
 function createPlayer(player) {
@@ -122,6 +119,8 @@ function createPlayer(player) {
 }
 
 function openEditModal(player) {
+  player['isAdmin'] = player.role == 'ADMIN' ? true : false
+  player['isMember'] = player.role == 'MEMBER' ? true : false
   selectedPlayer.value = { ...player }
   editPlayerModal.value.open()
 }

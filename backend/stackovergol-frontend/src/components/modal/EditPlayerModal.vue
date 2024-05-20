@@ -107,6 +107,7 @@ function open(){
 
 function update(){
     const playerToUpdate = {...props.selectedPlayer}
+    playerToUpdate['role'] = playerToUpdate.isAdmin ? 'ADMIN' : 'MEMBER'
     if(playerToUpdate.password == undefined){
         playerToUpdate.password = ''
     }
