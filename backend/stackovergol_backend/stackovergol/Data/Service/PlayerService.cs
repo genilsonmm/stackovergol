@@ -49,7 +49,11 @@ namespace stackovergol.Data.Service
             if (!_dataContext.Player.Any(p => p.PlayerId == playerDto.PlayerId))
                 throw new NotFoundException("Jogador não encontrado");
 
-            _dataContext.Entry(ToEntity(playerDto)).State = EntityState.Modified;
+            var role = _dataContext.Roles.Where(_ => _.Name.Equals(playerDto.Role)).FirstOrDefault();
+            var player = ToEntity(playerDto);
+            player.RoleId = role.RoleId;
+
+            _dataContext.Entry(player).State = EntityState.Modified;
             return _dataContext.SaveChanges();
         }
 

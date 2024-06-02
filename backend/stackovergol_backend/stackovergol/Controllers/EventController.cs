@@ -5,6 +5,7 @@ using stackovergol.Data.Service;
 using stackovergol.Dto;
 using stackovergol.Infra;
 using stackovergol.Infra.Security;
+using System.Diagnostics.CodeAnalysis;
 
 namespace stackovergol.Controllers
 {
@@ -24,14 +25,40 @@ namespace stackovergol.Controllers
             return Ok(eventService.GetAll());
         }
 
+        /// <summary>
+        /// Next event
+        /// </summary>
+        /// <returns></returns>
         [Authorize(Roles = Constants.GERAL)]
         [HttpGet("next")]
         public ActionResult GetNext() => Ok(eventService.GetNext());
 
+        /// <summary>
+        /// Create new events
+        /// </summary>
+        /// <param name="eventDTO"></param>
+        /// <returns></returns>
         [Authorize(Roles = Constants.ADMIN)]
         [HttpPost("next")]
         public ActionResult Post([FromBody] EventResponse eventDTO) {
             return Ok(eventService.Add(eventDTO));
+        }
+
+        
+        [Authorize(Roles = Constants.GERAL)]
+        [HttpPost("register-player-in-event")]
+        public ActionResult InOrOut([FromBody] InOrOutEventDTO inOrOutEventDTO) 
+        {
+            eventService.PlayerInOrOutOfEvent(inOrOutEventDTO);
+            return Created();
+        }
+
+        [Authorize(Roles =Constants.ADMIN)]
+        [HttpDelete("remove-player-from-event/{playerId}")]
+        public ActionResult DeletePlayerFromMatch(int playerId) 
+        {
+            eventService.DeletePlayerFromMatch(playerId);
+            return Ok();
         }
     }
 }

@@ -14,5 +14,11 @@ export default {
     },
     async update(event) {
         return await service.axios.put(uri, event)
+    },
+    async registerPlayerInEvent(eventPlayer){
+        return await service.axios.post(`${uri}/register-player-in-event`, eventPlayer)
+    },
+    async removePlayerInEvent(playerId){
+        return await service.axios.delete(`${uri}/remove-player-from-event/${playerId}`)
     }
 }

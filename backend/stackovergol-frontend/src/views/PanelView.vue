@@ -21,6 +21,7 @@
             <a href="#" @click="logOut" class="nav-link active" to="/events">Sair</a>
           </li>
         </ul>
+        <label class="user-info">Olá<br>{{utils.userSession().name}}</label>
         <img class="user-photo" src="@/assets/default-user.png" width="60" alt="user photo" />
       </div>
     </div>
@@ -33,6 +34,7 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
+import utils from '@/utils/utils'
 const router = useRouter()
 
 function logOut(){
@@ -41,3 +43,9 @@ function logOut(){
 }
 
 </script>
+
+<style scoped>
+.user-info{
+  font-size: 13px;
+}
+</style>

@@ -11,5 +11,6 @@ namespace stackovergol.Data.Entity
         [Required]
         public int PlayerId { get; set; }
         public virtual Player Player { get; set; }
+        public bool IAmIn { get; set; }
     }
 }

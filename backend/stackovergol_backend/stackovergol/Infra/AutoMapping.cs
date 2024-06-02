@@ -10,7 +10,9 @@ namespace stackovergol.Infra
         {
             CreateMap<Player, PlayerAuthDTO>()
                 .ForMember(dest => dest.Role, opt => opt.MapFrom(src => (src.Role.Name)));
-            CreateMap<PlayerDTO, Player>();
+            
+            CreateMap<PlayerDTO, Player>()
+                .ForMember(dest => dest.RoleId, opt => opt.Ignore());
 
             CreateMap<Player, PlayerDTO>();
 
@@ -25,6 +27,8 @@ namespace stackovergol.Infra
 
             CreateMap<EventRequest, Event>();
             CreateMap<Event, EventRequest>();
+
+            CreateMap<InOrOutEventDTO, EventPlayer>();
         }
     }
 }
