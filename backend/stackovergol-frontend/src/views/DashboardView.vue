@@ -104,7 +104,7 @@ onMounted(() => {
 })
 
 function openPlayerSelection(){
-  selectPlayerModal.value.open()
+  selectPlayerModal.value.open(event.value.players)
 }
 
 function getMatch() {
@@ -137,8 +137,8 @@ function iamOut(playerId) {
   register(playerEvent)
 }
 
-function addPlayersManually(players){
-  console.log('addPlayersManually', players)
+function addPlayersManually(player){
+  iamIn(player.playerId)
 }
 
 function register(playerEvent) {

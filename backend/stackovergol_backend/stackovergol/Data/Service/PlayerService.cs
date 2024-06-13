@@ -5,6 +5,7 @@ using stackovergol.Data.Repository;
 using stackovergol.Dto;
 using stackovergol.Exceptions;
 using stackovergol.Infra;
+using System.Linq.Expressions;
 
 namespace stackovergol.Data.Service
 {
@@ -19,6 +20,23 @@ namespace stackovergol.Data.Service
             var players = _dataContext.Player.Where(p=>p.Enabled==true).OrderBy(p => p.Role.Name.Equals(Constants.MEMBER)).OrderBy(p => p.Name).Include(r=>r.Role).ToList();
             return players is List<Player> 
                 ? _mapper.Map<List<PlayerResponseDTO>>(players) 
+                : new List<PlayerResponseDTO>();
+        }
+
+        public List<PlayerResponseDTO> GetAllExcept(List<int> playersId)
+        {
+            string ids = "";
+            playersId.ForEach(id =>
+            {
+                ids += playersId.Last() == id ? id : id + ",";
+            });
+
+            string query = $"select p.*, r.Name as Role from Player p inner join Roles r on p.RoleId = r.RoleId and p.Enabled = TRUE and PlayerId not in ({ids}) order by p.Name";
+
+            var players = _dataContext.Player.FromSqlRaw(query).ToList();
+       
+            return players is List<Player>
+                ? _mapper.Map<List<PlayerResponseDTO>>(players)
                 : new List<PlayerResponseDTO>();
         }
 

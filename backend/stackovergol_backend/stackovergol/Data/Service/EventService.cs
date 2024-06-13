@@ -44,9 +44,10 @@ namespace stackovergol.Data.Service
         public void PlayerInOrOutOfEvent(InOrOutEventDTO inOrOutEventDTO)
         {
             EventPlayer eventPlayer = _dataContext.EventPlayer.Where(e => e.EventId == inOrOutEventDTO.EventId && e.PlayerId == inOrOutEventDTO.PlayerId).FirstOrDefault();
-            eventPlayer.IAmIn = inOrOutEventDTO.IAmIn;
+            
             if (eventPlayer != null)
             {
+                eventPlayer.IAmIn = inOrOutEventDTO.IAmIn;
                 _dataContext.Entry(eventPlayer).State = EntityState.Modified;
             }
             else

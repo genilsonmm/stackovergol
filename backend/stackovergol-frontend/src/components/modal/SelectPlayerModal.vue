@@ -9,19 +9,20 @@
                 <div class="modal-body">
                     <ul class="list-group">
                         <li v-for="item in players" :key="item.playerId" class="list-group-item">
-                            <div class="player-container" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="player-container" aria-expanded="false">
                                 <div>
-                                    <i class="bi bi-emoji-dizzy-fill out"></i>
+                                    <span class="badge text-bg-primary rounded-pill">{{ item.rating }}</span>
                                     {{ item.name }}
                                 </div>
-                                <span class="badge text-bg-primary rounded-pill">4</span>
+                                <button type="button" class="btn btn-success" @click="add(item)">
+                                    <i class="bi bi-plus"></i>
+                                </button>
                             </div>                       
                         </li>
                     </ul>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" @click="close">Fechar</button>
-                    <button type="button" class="btn btn-primary" @click="add">Adicionar</button>
                 </div>
             </div>
         </div>
@@ -34,7 +35,6 @@ import playerService from "@/services/playerService";
 
 const modalInstance = ref(null)
 const isOpen = ref(false)
-const playersSelected = ref([])
 const players = ref([])
 
 defineExpose({ open, close })
@@ -49,14 +49,6 @@ onMounted(() => {
     if (modalInstance.value) {
         close()
     }
-
-    players.value = playerService.getAll()
-        .then((response)=>{
-            players.value = response.data
-        })
-        .catch((error)=>{
-
-        })
 })
 
 function close() {
@@ -64,13 +56,32 @@ function close() {
     modalInstance.value.hide()
 }
 
-function open() {
+function open(playersInAndOut) {
     isOpen.value = true
     modalInstance.value.show()
+
+    const inS = playersInAndOut.in.map(p => {
+        return p.playerId
+    })
+
+    const outS = playersInAndOut.out.map(p => {
+        return p.playerId
+    })
+
+    const ids = [...inS, ...outS]
+
+    players.value = playerService.getAllExcept(ids)
+        .then((response)=>{
+            players.value = response.data
+        })
+        .catch((error)=>{
+
+        })
 }
 
-function add() {
-    emitEvent('updateListInAndOutEvent', playersSelected.value)
+function add(player) {
+    players.value = players.value.filter(p=>p.playerId != player.playerId)
+    emitEvent('updateListInAndOutEvent', player)
 }
 
 </script>

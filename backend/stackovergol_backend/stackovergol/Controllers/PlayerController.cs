@@ -23,6 +23,13 @@ namespace stackovergol.Controllers
         public IEnumerable<PlayerResponseDTO> Get() => playerService.GetAll();
 
         [Authorize(Roles = Constants.ADMIN)]
+        [HttpPost("except")]
+        public ActionResult GetExcept([FromBody]List<int> ids)
+        {
+            return Ok(playerService.GetAllExcept(ids));
+        }
+
+        [Authorize(Roles = Constants.ADMIN)]
         [HttpPost]
         public ActionResult Post([FromBody] PlayerDTO player)
         {
