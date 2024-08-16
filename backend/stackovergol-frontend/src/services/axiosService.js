@@ -6,7 +6,7 @@ axios.defaults.baseURL = "http://localhost:5079/api"
 
 function init() {
     let authenticatedUser = localStorage.getItem('user')
-    console.log('authenticatedUser', authenticatedUser)
+    console.log('[axiosService] authenticatedUser', authenticatedUser)
 
     if (authenticatedUser) {
         let token = JSON.parse(authenticatedUser).token
@@ -51,7 +51,9 @@ axios.interceptors.response.use((response) => {
                 window.location.href = "/sign-in"
             }, 5)
         } else {
-            window.location.href = "/sign-in"
+            //localStorage.removeItem('user')
+            //window.location.href = "/sign-in"
+            window.location.reload()
         }
     }
 

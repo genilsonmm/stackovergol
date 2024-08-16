@@ -10,7 +10,7 @@
         <label for="floatingInput">Usuário</label>
       </div>
       <div class="form-floating">
-        <input type="password" class="form-control" v-model="user.password" id="floatingPassword" placeholder="Password">
+        <input @keyup.enter="signIn" type="password" class="form-control" v-model="user.password" id="floatingPassword" placeholder="Password">
         <label for="floatingPassword">Senha</label>
       </div>
       <!--
@@ -42,8 +42,11 @@ function signIn() {
     .then((response) => {
       if (response.data.token) {
         localStorage.setItem('user', JSON.stringify(response.data))
-        router.push('/panel')
+
       }
+    })
+    .then(()=>{
+      router.push('/panel')
     })
     .catch((error) => {
       console.log(error)
