@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using stackovergol.Data.Entity;
+using stackovergol.Infra.Security;
 
 namespace stackovergol.Data
 {
@@ -21,6 +22,34 @@ namespace stackovergol.Data
                 .HasOne(t => t.TeamRight)
                 .WithMany()
                 .HasForeignKey(t => t.TeamRightId);
+
+            InitialData(modelBuilder);
+        }
+
+        private void InitialData(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Role>().HasData(
+                new Role
+                {
+                    RoleId = 1,
+                    Name = "ADMIN",
+                });
+
+            modelBuilder.Entity<Player>().HasData(
+                new Player { 
+                    PlayerId = 1,
+                    Name = "Genilson Medeiros",
+                    Username = "genilson.martins",
+                    Password = TokenManager.Encrypted("123456"),
+                    Phone = "83981808066",
+                    Email = "genisnilson@gmail.com",
+                    Rating = 4,
+                    RoleId = 1,
+                    IsGoalkeeper = false,
+                    Enabled = true,
+                    CreatedAt = DateTime.UtcNow
+                }
+            );
         }
 
         public DbSet<Player> Player { get; set; }

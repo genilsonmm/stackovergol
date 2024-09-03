@@ -25,6 +25,8 @@ namespace stackovergol.Data.Service
 
         public List<PlayerResponseDTO> GetAllExcept(List<int> playersId)
         {
+            if(playersId.Count == 0) return new List<PlayerResponseDTO>();
+
             string ids = "";
             playersId.ForEach(id =>
             {
@@ -44,7 +46,7 @@ namespace stackovergol.Data.Service
         {
             try
             {
-                Role role = _dataContext.Roles.Where(r => r.Name.Equals(playerDto.Role)).FirstOrDefault();
+                Role? role = _dataContext.Roles.Where(r => r.Name.Equals(playerDto.Role)).FirstOrDefault();
                 Player player = ToEntity(playerDto);
                 player.Enabled = true;
                 player.RoleId = role.RoleId;

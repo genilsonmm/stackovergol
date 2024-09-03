@@ -11,8 +11,8 @@ using stackovergol.Data;
 namespace stackovergol.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240520214816_inOrOut")]
-    partial class inOrOut
+    [Migration("20240903191033_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -153,6 +153,22 @@ namespace stackovergol.Migrations
                         .IsUnique();
 
                     b.ToTable("Player");
+
+                    b.HasData(
+                        new
+                        {
+                            PlayerId = 1,
+                            CreatedAt = new DateTime(2024, 9, 3, 19, 10, 31, 455, DateTimeKind.Utc).AddTicks(857),
+                            Email = "genisnilson@gmail.com",
+                            Enabled = true,
+                            IsGoalkeeper = false,
+                            Name = "Genilson Medeiros",
+                            Password = "533712210c0da595f4e99450933ca40f4d7dd5aab9e82c6fd075fac53d370c46",
+                            Phone = "83981808066",
+                            Rating = 1,
+                            RoleId = 1,
+                            Username = "genilson.martins"
+                        });
                 });
 
             modelBuilder.Entity("stackovergol.Data.Entity.PlayerMatchStatistic", b =>
@@ -198,6 +214,13 @@ namespace stackovergol.Migrations
                     b.HasKey("RoleId");
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            RoleId = 1,
+                            Name = "ADMIN"
+                        });
                 });
 
             modelBuilder.Entity("stackovergol.Data.Entity.Team", b =>

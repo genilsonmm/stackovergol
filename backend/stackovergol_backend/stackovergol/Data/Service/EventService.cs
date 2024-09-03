@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using stackovergol.Data.Entity;
 using stackovergol.Data.Repository;
 using stackovergol.Dto;
+using stackovergol.Exceptions;
 
 namespace stackovergol.Data.Service
 {
@@ -11,7 +12,7 @@ namespace stackovergol.Data.Service
         public EventService(DataContext dataContext, IMapper mapper)
             : base(dataContext, mapper) { }
 
-        public int Add(EventResponse eventDTO)
+        public int Add(EventRequest eventDTO)
         {
             Event newEvent = _mapper.Map<Event>(eventDTO);
             _dataContext.Event.Add(newEvent);
@@ -23,6 +24,8 @@ namespace stackovergol.Data.Service
         {
             Event lastEvent = _dataContext.Event.OrderByDescending(e => e.EventId).FirstOrDefault();
 
+            if (lastEvent == null) throw new NoContentException("Sem eventos");
+            
             var response = _mapper.Map<EventResponse>(lastEvent);
             response.Players = PlayersInTheNextMatch(lastEvent.EventId);
             return response;

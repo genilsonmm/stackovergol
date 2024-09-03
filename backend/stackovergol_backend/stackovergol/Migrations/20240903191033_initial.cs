@@ -69,7 +69,7 @@ namespace stackovergol.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Username = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Password = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false)
+                    Password = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Phone = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
@@ -139,7 +139,8 @@ namespace stackovergol.Migrations
                     EventPlayerId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     EventId = table.Column<int>(type: "int", nullable: false),
-                    PlayerId = table.Column<int>(type: "int", nullable: false)
+                    PlayerId = table.Column<int>(type: "int", nullable: false),
+                    IAmIn = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -222,6 +223,16 @@ namespace stackovergol.Migrations
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.InsertData(
+                table: "Roles",
+                columns: new[] { "RoleId", "Name" },
+                values: new object[] { 1, "ADMIN" });
+
+            migrationBuilder.InsertData(
+                table: "Player",
+                columns: new[] { "PlayerId", "CreatedAt", "Email", "Enabled", "IsGoalkeeper", "Name", "Password", "Phone", "Photo", "Rating", "RoleId", "Username" },
+                values: new object[] { 1, new DateTime(2024, 9, 3, 19, 10, 31, 455, DateTimeKind.Utc).AddTicks(857), "genisnilson@gmail.com", true, false, "Genilson Medeiros", "533712210c0da595f4e99450933ca40f4d7dd5aab9e82c6fd075fac53d370c46", "83981808066", null, 1, 1, "genilson.martins" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_EventPlayer_EventId",

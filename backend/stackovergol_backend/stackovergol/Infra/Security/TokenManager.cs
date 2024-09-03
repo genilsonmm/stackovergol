@@ -1,7 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using stackovergol.Dto;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace stackovergol.Infra.Security
@@ -34,6 +34,17 @@ namespace stackovergol.Infra.Security
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        public static string Encrypted(string password)
+        {
+            const string AUTH_TOKEN = "stack-overgol";
+            byte[] key = Encoding.ASCII.GetBytes(AUTH_TOKEN);
+            HMACSHA256 myhmacsha256 = new HMACSHA256(key);
+            byte[] byteArray = Encoding.ASCII.GetBytes(password);
+            MemoryStream stream = new MemoryStream(byteArray);
+            string result = myhmacsha256.ComputeHash(stream).Aggregate("", (s, e) => s + String.Format("{0:x2}", e), s => s);
+            return result;
         }
     }
 }

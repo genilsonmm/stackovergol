@@ -7,21 +7,26 @@
           <div class="card-header">
             Próxima partida
           </div>
-          <div class="card-body">
-            <h5 class="card-title">{{ nextEvent }}</h5>
-            <p class="card-text">Confirme sua participação até às 16h do dia {{ nextEvent }}</p>
-            <div>
-              <a href="#" @click="iamIn(userSession.id)" class="btn btn-success">Estou dentro</a>
-              <a href="#" @click="iamOut(userSession.id)" class="btn btn-danger ml-5">Estou fora</a>
+          <div v-if="event">
+            <div class="card-body">
+              <h5 class="card-title">{{ nextEvent }}</h5>
+              <p class="card-text">Confirme sua participação até às 16h do dia {{ nextEvent }}</p>
+              <div>
+                <a href="#" @click="iamIn(userSession.id)" class="btn btn-success">Estou dentro</a>
+                <a href="#" @click="iamOut(userSession.id)" class="btn btn-danger ml-5">Estou fora</a>
+              </div>
+            </div>
+            <div class="card-footer text-body-secondary">
+              Falta(m) {{ remainingDate }} dia(s)
             </div>
           </div>
-          <div class="card-footer text-body-secondary">
-            Falta(m) {{ remainingDate }} dia(s)
+          <div v-else class="card-body">
+            <h5 class="card-title">Sem partidas</h5>
           </div>
         </div>
       </div>
     </div>
-    <div v-if="userSession?.role == utils.ROLES.ADMIN" class="row mt-2">
+    <div v-if="userSession?.role == utils.ROLES.ADMIN && event" class="row mt-2">
       <div class="col" style="text-align: center;">
         <button @click="openPlayerSelection" class="btn btn-outline-warning">Adicionar manualmente</button>
       </div>
@@ -43,9 +48,12 @@
                   <span class="badge text-bg-primary rounded-pill">{{ item.rating }}</span>
                 </div>
                 <ul class="dropdown-menu">
-                  <li><a v-if="userSession.id == item.playerId || userSession.role == utils.ROLES.ADMIN" @click="iamOut(item.playerId)" class="dropdown-item" href="#"><i class="bi bi-emoji-dizzy-fill"></i> Estou fora</a></li>
+                  <li><a v-if="userSession.id == item.playerId || userSession.role == utils.ROLES.ADMIN"
+                      @click="iamOut(item.playerId)" class="dropdown-item" href="#"><i
+                        class="bi bi-emoji-dizzy-fill"></i> Estou fora</a></li>
                   <li><a class="dropdown-item" href="#"><i class="bi bi-person-lines-fill"></i> Ver Perfil</a></li>
-                  <li><a v-if="userSession.role == utils.ROLES.ADMIN" @click="removePlayer(item.playerId)" class="dropdown-item" href="#"><i class="bi bi-trash3"></i> Remover</a></li>
+                  <li><a v-if="userSession.role == utils.ROLES.ADMIN" @click="removePlayer(item.playerId)"
+                      class="dropdown-item" href="#"><i class="bi bi-trash3"></i> Remover</a></li>
                 </ul>
               </li>
             </ul>
@@ -68,9 +76,11 @@
                   <span class="badge text-bg-primary rounded-pill">{{ item.rating }}</span>
                 </div>
                 <ul class="dropdown-menu">
-                  <li><a @click="iamIn(item.playerId)" class="dropdown-item" href="#"><i class="bi bi-emoji-sunglasses-fill"></i> Estou dentro</a></li>
+                  <li><a @click="iamIn(item.playerId)" class="dropdown-item" href="#"><i
+                        class="bi bi-emoji-sunglasses-fill"></i> Estou dentro</a></li>
                   <li><a class="dropdown-item" href="#"><i class="bi bi-person-lines-fill"></i> Ver Perfil</a></li>
-                  <li v-if="userSession.role == utils.ROLES.ADMIN"><a @click="removePlayer(item.playerId)" class="dropdown-item" href="#"><i class="bi bi-trash3"></i> Remover</a></li>
+                  <li v-if="userSession.role == utils.ROLES.ADMIN"><a @click="removePlayer(item.playerId)"
+                      class="dropdown-item" href="#"><i class="bi bi-trash3"></i> Remover</a></li>
                 </ul>
               </li>
             </ul>
@@ -103,7 +113,7 @@ onMounted(() => {
   userSession.value = utils.userSession()
 })
 
-function openPlayerSelection(){
+function openPlayerSelection() {
   selectPlayerModal.value.open(event.value.players)
 }
 
@@ -137,7 +147,7 @@ function iamOut(playerId) {
   register(playerEvent)
 }
 
-function addPlayersManually(player){
+function addPlayersManually(player) {
   iamIn(player.playerId)
 }
 
@@ -156,27 +166,27 @@ function register(playerEvent) {
     })
 }
 
-function removePlayer(playerId){
+function removePlayer(playerId) {
   eventService.removePlayerInEvent(playerId)
-  .then((response)=>{
+    .then((response) => {
       getMatch()
       notification.success('Eventos', 'Jogador removido da partida com sucesso!')
-  })
-  .catch((error)=>{
-    console.log(error)
-    if(error.response.status == 403){
-      notification.error(
-        "Eventos",
-        "Você não tem permissão para remover o jogador da partida"
-      );
-    } else {
-      notification.error(
-        "Eventos",
-        "Não foi possível remover o jogador da partida: " + error
-      );
-    }
+    })
+    .catch((error) => {
+      console.log(error)
+      if (error.response.status == 403) {
+        notification.error(
+          "Eventos",
+          "Você não tem permissão para remover o jogador da partida"
+        );
+      } else {
+        notification.error(
+          "Eventos",
+          "Não foi possível remover o jogador da partida: " + error
+        );
+      }
 
-  })
+    })
 }
 
 function getPlayerEvent(inOrOut, playerId) {

@@ -40,7 +40,7 @@ namespace stackovergol.Controllers
         /// <returns></returns>
         [Authorize(Roles = Constants.ADMIN)]
         [HttpPost("next")]
-        public ActionResult Post([FromBody] EventResponse eventDTO) {
+        public ActionResult Post([FromBody] EventRequest eventDTO) {
             return Ok(eventService.Add(eventDTO));
         }
 

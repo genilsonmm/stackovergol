@@ -35,7 +35,10 @@ namespace stackovergol.Middlewares
                     case DuplicateException:
                         problem = ProblemDetailsFactory(StatusCodes.Status400BadRequest, ex.Message);
                         break;
-                     default:
+                    case NoContentException:
+                        problem = ProblemDetailsFactory(StatusCodes.Status204NoContent, ex.Message);
+                        break;
+                    default:
                         problem = ProblemDetailsFactory(StatusCodes.Status500InternalServerError, ex.Message);
                         break;
                 }
