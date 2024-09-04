@@ -1,7 +1,7 @@
 const _ = require('lodash');
 const fs = require("fs");
 
-const filePath = './players_2024_08_13.json';
+const filePath = './players_2024_08_27.json';
 
 function initPlayers() {
     const playersString = fs.readFileSync(filePath)
