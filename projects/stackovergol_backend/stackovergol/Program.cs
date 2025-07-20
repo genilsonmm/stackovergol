@@ -8,6 +8,7 @@ using stackovergol.Data.Entity;
 using stackovergol.Data.Service;
 using stackovergol.Infra.Security;
 using stackovergol.Middlewares;
+using stackovergol.Services;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -26,6 +27,7 @@ builder.Services.AddScoped<DataContext>();
 builder.Services.AddScoped<PlayerService>();
 builder.Services.AddScoped<MatchService>();
 builder.Services.AddScoped<EventService>();
+builder.Services.AddScoped<TeamBalancer>();
 
 var connection = builder.Configuration.GetValue<string>("MySqlConnection:MySqlConnectionString");
 builder.Services.AddDbContextPool<DataContext>(

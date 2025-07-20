@@ -1,7 +1,7 @@
 const _ = require('lodash');
 const fs = require("fs");
 
-const filePath = './players_2024_11_12.json';
+const filePath = './players_2025_07_15.json';
 
 function initPlayers() {
     const playersString = fs.readFileSync(filePath)
@@ -24,11 +24,11 @@ function getTeamName(index){
     if(index == 1){
         return 'A (Azul)'
     } else if(index == 2){
-        return 'B (Verde)'
+        return 'V (Verde)'
     } else if(index == 3){
-        return 'C (Laranja)'
+        return 'L (Laranja)'
     } else {
-        return 'D (Preto)'
+        return 'P (Preto)'
     }
 }
 
@@ -40,7 +40,7 @@ function createTeams(numberOfTeams) {
     return teams
 }
 
-function createMatch(numberOfTeams, playerPerTeam, players) {
+function createMatch(numberOfTeams, playerPerTeam, players, backupRating) {
     const teams = createTeams(numberOfTeams)
     const matchPlayer = [...players]
     console.log(teams)
@@ -59,7 +59,7 @@ function createMatch(numberOfTeams, playerPerTeam, players) {
             } else if (player == undefined) {
                 player = {
                     name: 'Jogador',
-                    rating: 2
+                    rating: backupRating
                 }
             }
 
@@ -124,7 +124,7 @@ function labance(teams) {
 }
 
 function shuffleTeams(teams, playerPerTeam) {
-    const repeat = 30
+    const repeat = 300
     for (let i = 0; i < playerPerTeam * repeat; i++) {
         let randomTeamIndex = getRandomTeamIndex(teams)
         const randomPositionIndex = Math.floor(Math.random() * playerPerTeam);
@@ -152,4 +152,15 @@ function getRandomTeamIndex(teams) {
 }
 
 //fullRatingPlayers()
-createMatch(4, 6, initPlayers())
+
+
+const parseArgs = require('minimist');
+
+const params = parseArgs(process.argv)
+console.log(params) 
+//-t amount of teams 
+//-p amount of players
+//-b complete with rating x
+//node .\partida.js -t=4 -p=6 -b=2
+const backupRating = params.b ? params.b : 2
+createMatch(params.t, params.p, initPlayers(), backupRating)

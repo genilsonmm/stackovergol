@@ -18,17 +18,27 @@
             Jogo {{ index + 1 }}
           </span>
           <div class="card-body">
-            <button @click="registerMatch(match.id, match.team1.id, 1)" class="btn btn-success mr-5">+</button>
-            <button @click="registerMatch(match.id, match.team1.id, -1)" class="btn btn-danger mr-5">-</button>
-            <span class="team-name mr-5"> {{ match.team1.name }}</span>
-            <span class="gol ml-5">{{ match.team1.gol }}</span>
+            <div>
+              <button @click="registerMatch(match.id, match.team1.id, 1)" class="btn btn-success mr-5">+</button>
+              <button @click="registerMatch(match.id, match.team1.id, -1)" class="btn btn-danger mr-5">-</button>
+              <span class="team-name mr-5"> {{ match.team1.name }}</span>
+              <span class="gol ml-5">{{ match.team1.gol }}</span>
 
-            <span class="mr-5">x</span>
+              <span class="mr-5">x</span>
 
-            <span class="gol ml-5">{{ match.team2.gol }}</span>
-            <span class="team-name mr-5">{{ match.team2.name }}</span>
-            <button @click="registerMatch(match.id, match.team2.id, 1)" class="btn btn-success mr-5">+</button>
-            <button @click="registerMatch(match.id, match.team2.id, -1)" class="btn btn-danger">-</button>
+              <span class="gol ml-5">{{ match.team2.gol }}</span>
+              <span class="team-name mr-5">{{ match.team2.name }}</span>
+              <button @click="registerMatch(match.id, match.team2.id, 1)" class="btn btn-success mr-5">+</button>
+              <button @click="registerMatch(match.id, match.team2.id, -1)" class="btn btn-danger">-</button>
+            </div>
+          </div>
+          <div class="crono">
+            <div><button class="btn btn-primary" @click="startCrono(match.id)">Iniciar</button></div>
+            <div>
+              <h4 v-if="crono.matchId === match.id">{{ crono.time }}</h4>
+              <h4 v-else>{{ match.time }}</h4>
+            </div>
+            <div><button class="btn btn-warning" @click="stopCrono(match.id)">Parar</button></div>
           </div>
         </div>
       </div>
@@ -39,20 +49,30 @@
             Final
           </span>
           <div class="card-body">
-            <button @click="registerMatch(teams[6].id, teams[6].team1.id, 1, false)"
-              class="btn btn-success mr-5">+</button>
-            <button @click="registerMatch(teams[6].id, teams[6].team1.id, -1, false)"
-              class="btn btn-danger mr-5">-</button>
-            <span class="team-name mr-5"> {{ teams[6].team1.name }}</span>
-            <span class="gol ml-5">{{ teams[6].team1.gol }}</span>
+            <div>
+              <button @click="registerMatch(teams[6].id, teams[6].team1.id, 1, false)"
+                class="btn btn-success mr-5">+</button>
+              <button @click="registerMatch(teams[6].id, teams[6].team1.id, -1, false)"
+                class="btn btn-danger mr-5">-</button>
+              <span class="team-name mr-5"> {{ teams[6].team1.name }}</span>
+              <span class="gol ml-5">{{ teams[6].team1.gol }}</span>
 
-            <span class="mr-5">x</span>
+              <span class="mr-5">x</span>
 
-            <span class="gol ml-5">{{ teams[6].team2.gol }}</span>
-            <span class="team-name mr-5">{{ teams[6].team2.name }}</span>
-            <button @click="registerMatch(teams[6].id, teams[6].team2.id, 1)" class="btn btn-success mr-5">+</button>
-            <button @click="registerMatch(teams[6].id, teams[6].team2.id, -1)" class="btn btn-danger">-</button>
+              <span class="gol ml-5">{{ teams[6].team2.gol }}</span>
+              <span class="team-name mr-5">{{ teams[6].team2.name }}</span>
+              <button @click="registerMatch(teams[6].id, teams[6].team2.id, 1)" class="btn btn-success mr-5">+</button>
+              <button @click="registerMatch(teams[6].id, teams[6].team2.id, -1)" class="btn btn-danger">-</button>
+            </div>
           </div>
+          <div class="crono">
+              <div><button class="btn btn-primary" @click="startCrono(8)">Iniciar</button></div>
+              <div>
+                <h4 v-if="crono.matchId === 8">{{ crono.time }}</h4>
+                <h4 v-else>{{ JSON.parse(JSON.stringify(crono.time)) }}</h4>
+              </div>
+              <div><button class="btn btn-warning" @click="stopCrono(8)">Parar</button></div>
+            </div>
         </div>
       </div>
       <div class="mt-2 match-table">
@@ -272,8 +292,13 @@ import _ from 'lodash'
 const teams = reactive(getInitialTable())
 let statistics = reactive([...getStatistics()])
 let ranking = ref([])
-const goalkeeper1 = ref({id:1, name:'', gols:0})
-const goalkeeper2 = ref({id:2, name:'', gols:0})
+const goalkeeper1 = ref({ id: 1, name: '', gols: 0 })
+const goalkeeper2 = ref({ id: 2, name: '', gols: 0 })
+const crono = reactive({ matchId: 0, time: "00:00:00" })
+let timer = false
+let minute = 0;
+let second = 0;
+let count = 0;
 
 onMounted(() => {
   const data = localStorage.getItem('teams')
@@ -283,14 +308,73 @@ onMounted(() => {
     Object.assign(teams, JSON.parse(data))
   }
 
-  if(goalkeeper1Data){
+  if (goalkeeper1Data) {
     Object.assign(goalkeeper1.value, JSON.parse(goalkeeper1Data))
     Object.assign(goalkeeper2.value, JSON.parse(goalkeeper2Data))
   }
 })
 
+function startCrono(matchId) {
+  timer = true
+  crono.matchId = matchId
+  stopWatch()
+}
+
+function stopCrono(matchId) {
+  timer = false
+  const match = teams.find(m => m.id === matchId)
+  match.time = crono.time
+  crono.matchId = 0
+  minute = 0;
+  second = 0;
+  count = 0;
+  localStorage.setItem('teams', JSON.stringify(teams))
+}
+
+function stopWatch() {
+  if (timer) {
+    count++;
+
+    if (count == 100) {
+      second++;
+      count = 0;
+    }
+
+    if (second == 60) {
+      minute++;
+      second = 0;
+    }
+
+    if (minute == 60) {
+      hour++;
+      minute = 0;
+      second = 0;
+    }
+
+    let minString = minute;
+    let secString = second;
+    let countString = count;
+
+
+    if (minute < 10) {
+      minString = "0" + minString;
+    }
+
+    if (second < 10) {
+      secString = "0" + secString;
+    }
+
+    if (count < 10) {
+      countString = "0" + countString;
+    }
+
+    crono.time = `${minString}:${secString}:${countString}`
+    setTimeout(stopWatch, 10);
+  }
+}
+
 function updateGoalkeeper(id, gol) {
-  if(id === 1) {
+  if (id === 1) {
     goalkeeper1.value.gols += gol
   } else {
     goalkeeper2.value.gols += gol
@@ -397,7 +481,7 @@ function getStatistics() {
     },
     {
       id: 2,
-      name: 'Time B',
+      name: 'Time V',
       win: 0,
       loss: 0,
       draw: 0,
@@ -406,7 +490,7 @@ function getStatistics() {
     },
     {
       id: 3,
-      name: 'Time C',
+      name: 'Time L',
       win: 0,
       loss: 0,
       draw: 0,
@@ -415,7 +499,7 @@ function getStatistics() {
     },
     {
       id: 4,
-      name: 'Time D',
+      name: 'Time P',
       win: 0,
       loss: 0,
       draw: 0,
@@ -430,42 +514,50 @@ function getInitialTable() {
     {
       id: 1,
       team1: { id: 1, name: 'Time A', gol: 0 },
-      team2: { id: 2, name: 'Time B', gol: 0 }
+      team2: { id: 2, name: 'Time V', gol: 0 },
+      time: '00:00:00', ended: false
     },
     {
       id: 2,
-      team1: { id: 3, name: 'Time C', gol: 0 },
-      team2: { id: 4, name: 'Time D', gol: 0 }
+      team1: { id: 3, name: 'Time L', gol: 0 },
+      team2: { id: 4, name: 'Time P', gol: 0 },
+      time: '00:00:00', ended: false
     },
     {
       id: 3,
       team1: { id: 1, name: 'Time A', gol: 0 },
-      team2: { id: 4, name: 'Time D', gol: 0 }
+      team2: { id: 4, name: 'Time P', gol: 0 },
+      time: '00:00:00', ended: false
     },
     {
       id: 4,
-      team1: { id: 2, name: 'Time B', gol: 0 },
-      team2: { id: 3, name: 'Time C', gol: 0 }
+      team1: { id: 2, name: 'Time V', gol: 0 },
+      team2: { id: 3, name: 'Time L', gol: 0 },
+      time: '00:00:00', ended: false
     },
     {
       id: 5,
-      team1: { id: 2, name: 'Time B', gol: 0 },
-      team2: { id: 4, name: 'Time D', gol: 0 }
+      team1: { id: 2, name: 'Time V', gol: 0 },
+      team2: { id: 4, name: 'Time P', gol: 0 },
+      time: '00:00:00', ended: false
     },
     {
       id: 6,
       team1: { id: 1, name: 'Time A', gol: 0 },
-      team2: { id: 3, name: 'Time C', gol: 0 }
+      team2: { id: 3, name: 'Time L', gol: 0 },
+      time: '00:00:00', ended: false
     },
     {
       id: 7,
       team1: { id: 1, name: 'Time 1', gol: 0 },
-      team2: { id: 3, name: 'Time 2', gol: 0 }
+      team2: { id: 3, name: 'Time 2', gol: 0 },
+      time: '00:00:00', ended: false
     },
     {
       id: 8,
       team1: { id: 1, name: 'Time 3', gol: 0 },
-      team2: { id: 3, name: 'Time 4', gol: 0 }
+      team2: { id: 3, name: 'Time 4', gol: 0 },
+      time: '00:00:00', ended: false
     }
   ]
 }
@@ -494,6 +586,11 @@ function getInitialTable() {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.crono {
+  display: flex;
+  justify-content: space-between;
 }
 
 @media (max-width: 768px) {
